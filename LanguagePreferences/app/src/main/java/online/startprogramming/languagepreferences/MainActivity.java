@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_menu, menu);
 
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -34,11 +34,15 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.english:
                 setLanguage("English");
+                return true;
+//                Log.i("English clicked", "");
             case R.id.spanish:
                 setLanguage("Spanish");
+                return true;
             default:
                 return false;
         }
+
     }
 
     public void setLanguage (String language) {
