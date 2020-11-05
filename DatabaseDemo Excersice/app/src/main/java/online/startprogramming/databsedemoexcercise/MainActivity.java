@@ -15,20 +15,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            SQLiteDatabase sqLiteDatabase = this.openOrCreateDatabase("Events", MODE_PRIVATE, null);
-            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS events (name VARCHAR, year INT(4))");
+            SQLiteDatabase sqLiteDatabase = this.openOrCreateDatabase("Users", MODE_PRIVATE, null);
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS users (name VARCHAR, year INT(4))");
 
-            sqLiteDatabase.execSQL("INSERT INTO events (name, year) VALUES ('MIlenieum', 2000)");
-            sqLiteDatabase.execSQL("INSERT INTO events (name, year) VALUES ('Nick started teaching', 2014)");
+//            sqLiteDatabase.execSQL("INSERT INTO users (name, age) VALUES ('Nick', 18)");
+            sqLiteDatabase.execSQL("INSERT INTO users (name, age) VALUES ('Nick', 23)");
 
-            Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM events",null);
+//            sqLiteDatabase.execSQL("INSERT INTO users (name, age) VALUES ('Bob', 45)");
+
+            Cursor c = sqLiteDatabase.rawQuery("SELECT * FROM users WHERE name = 'Nick' AND age = 23",null);
             int nameIndex = c.getColumnIndex("name");
-            int yearIndex = c.getColumnIndex("year");
+            int ageIndex = c.getColumnIndex("age");
             c.moveToFirst();
 
             while (c != null) {
-                Log.i("Results - name", c.getString(nameIndex));
-                Log.i("Results - year", Integer.toString(c.getInt(yearIndex)));
+                Log.i("UserResults - name", c.getString(nameIndex));
+                Log.i("UserResults - age", Integer.toString(c.getInt(ageIndex)));
 
                 //to go next row in db
                 c.moveToNext();
